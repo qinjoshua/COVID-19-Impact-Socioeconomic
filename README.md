@@ -1,4 +1,4 @@
-# COVID-19 Impact By Socioeconomic Status
+# COVID-19 Impact by Socioeconomic Status
 By Joshua Qin and Jeanine Nasser
 
 A small data analysis project that analyzes the socio-economic impact of COVID-19 by comparing cases and death statistics from each county to the socio-economic makeup of those counties. The number of deaths or cases from each county is graphed in relation to the median income of that county, giving an approximate idea of how socio-economics play a role in the likelihood of COVID-19 infection and the potential outcome. The user has the option of filtering by state, or seeing the results of the entire country.
