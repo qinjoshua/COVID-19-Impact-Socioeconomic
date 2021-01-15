@@ -7,14 +7,14 @@ The [covid-19 dataset](https://github.com/nytimes/covid-19-data/blob/master/us-c
 
 This project was used as a submission for Northeastern University's Honors Studio for Data Science and Social Justice.
 
-### Per Capita COVID-19 Cases vs Mean Per Capita Income by County for the United States Graph
+### Per Capita COVID-19 Cases vs Mean Per Capita Income by County for the United States
 ![Per Capita COVID-19 Cases vs Mean Per Capita Income by County for the United States Graph](https://github.com/qinjoshua/COVID-19ImpactBySocioeconomicStatus/blob/main/PCCvMPCIbCUS.png)
 
-### Regression Line for Per Capita COVID-19 Cases vs Mean Per Capita Income by County for the United States Graph
+### Regression Line for Per Capita COVID-19 Cases vs Mean Per Capita Income by County for the United States
 ![Regression Line for Per Capita COVID-19 Cases vs Mean Per Capita Income by County for the United States Graph](https://github.com/qinjoshua/COVID-19ImpactBySocioeconomicStatus/blob/main/PCCvMPCIbCUS-Regression.png)
 
-### Per Capita COVID-19 Deaths vs Mean Per Capita Income by County for the United States Graph
+### Per Capita COVID-19 Deaths vs Mean Per Capita Income by County for the United States
 ![Per Capita COVID-19 Deaths vs Mean Per Capita Income by County for the United States Graph](https://github.com/qinjoshua/COVID-19ImpactBySocioeconomicStatus/blob/main/PCDvMPCIbCUS.png)
 
-### Regression Line for Per Capita COVID-19 Deaths vs Mean Per Capita Income by County for the United States Graph
+### Regression Line for Per Capita COVID-19 Deaths vs Mean Per Capita Income by County for the United States
 ![Regression Line for Per Capita COVID-19 Deaths vs Mean Per Capita Income by County for the United States Graph](https://github.com/qinjoshua/COVID-19ImpactBySocioeconomicStatus/blob/main/PCDvMPCIbCUS-Regression.png)
