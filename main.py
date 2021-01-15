@@ -1,0 +1,90 @@
+import matplotlib.pyplot as plt   # at the top of your file
+import numpy as np
+import csv       # this goes at the very top of your .py file
+
+# limit it by state or by the entire nation
+#STATE = 'Massachusetts'
+WHOLE_COUNTRY = 'United States'
+STATE = WHOLE_COUNTRY
+
+INCOME_COUNTY_INDEX = 1
+INCOME_MEDIAN_INDEX = 5
+INCOME_STATE_INDEX = 2
+INCOME_POPULATION_INDEX = 6
+
+perCapitaIncome = {}
+population = {}
+with open('per-capita-income.csv') as csvfile:
+    reader = csv.reader(csvfile, delimiter = ',')
+    next(reader)
+    for row in reader:
+        if (STATE == WHOLE_COUNTRY or row[INCOME_STATE_INDEX] == STATE) and row[INCOME_COUNTY_INDEX] != '':
+            income = int(row[INCOME_MEDIAN_INDEX].replace(',', '').replace('$', ''))
+            perCapitaIncome[row[INCOME_COUNTY_INDEX] + ', ' + row[INCOME_STATE_INDEX]] = income
+            population[row[INCOME_COUNTY_INDEX] + ', ' + row[INCOME_STATE_INDEX]] = int(row[INCOME_POPULATION_INDEX].replace(',', '').replace('$', ''))
+
+COVID_CASES_COUNTY_INDEX = 1
+COVID_CASES_INDEX = 4
+COVID_DEATHS_INDEX = 5
+COVID_CASES_STATE_INDEX = 2
+
+covidCases = {}
+covidDeaths = {}
+with open('us-counties.csv') as csvfile:
+    reader = csv.reader(csvfile, delimiter = ',')
+    next(reader)
+    for row in reader:
+        if (STATE == WHOLE_COUNTRY or row[COVID_CASES_STATE_INDEX] == STATE):
+            covidCases[row[COVID_CASES_COUNTY_INDEX] + ', ' + row[COVID_CASES_STATE_INDEX]] = int(row[COVID_CASES_INDEX])
+            covidDeaths[row[COVID_CASES_COUNTY_INDEX] + ', ' + row[COVID_CASES_STATE_INDEX]] = int(row[COVID_DEATHS_INDEX])
+
+counties = list(perCapitaIncome.keys())
+incomeData = []
+casesData = []
+deathsData = []
+
+for county in counties:
+    if county in covidCases:
+        incomeData.append(perCapitaIncome[county])
+        casesData.append(covidCases[county]/population[county])
+        deathsData.append(covidDeaths[county]/population[county])
+
+deathsCoef = np.polyfit(incomeData, deathsData, 1)
+deathsPoly1d_fn = np.poly1d(deathsCoef)
+
+plt.figure(1)
+#plt.figure(figsize=(10,8))
+#plt.scatter(incomeData, deathsData, s=1, c='indianred')
+plt.scatter(incomeData, deathsData, c='indianred')
+plt.title('Per Capita COVID Deaths v. Median Per Capita Income by County in '+ STATE)
+plt.xlabel('Median Per Capita Income by County (USD)')
+plt.ylabel('Per Capita COVID-19 Deaths by County')
+plt.plot(incomeData, deathsPoly1d_fn(incomeData), '--k')
+plt.show()
+
+plt.figure(2)
+plt.title('Regression Line of COVID Deaths v. Income')
+plt.xlabel('Median Per Capita Income by County (USD)')
+plt.ylabel('Per Capita Covid-19 Deaths by County')
+plt.plot(incomeData, deathsPoly1d_fn(incomeData), '--k')
+plt.show()
+
+casesCoef = np.polyfit(incomeData, casesData, 1)
+casesPoly1d_fn = np.poly1d(casesCoef)
+
+plt.figure(3)
+#plt.figure(figsize=(10,8))
+#plt.scatter(incomeData, casesData, s=1, c='yellowgreen')
+plt.scatter(incomeData, casesData, c='yellowgreen')
+plt.title('Per Capita COVID Cases v. Median Per Capita Income by County in '+ STATE)
+plt.xlabel('Median Per Capita Income by County (USD)')
+plt.ylabel('Per Capita COVID-19 Cases by County')
+plt.plot(incomeData, casesPoly1d_fn(incomeData), '--k')
+plt.show()
+
+plt.figure(4)
+plt.title('Regression Line of COVID Cases v. Income')
+plt.xlabel('Median Per Capita Income by County (USD)')
+plt.ylabel('Per Capita Covid-19 Deaths by County')
+plt.plot(incomeData, casesPoly1d_fn(incomeData), '--k')
+plt.show()
